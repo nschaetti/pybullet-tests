@@ -2,9 +2,13 @@
 # Imports
 import pybullet as p
 import time
+import pybullet_data
 
 # Connection
 p.connect(p.GUI)
+
+# ??
+p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
 # Load humanoid
 ob_uids = p.loadMJCF("mjcf/humanoid.xml")
@@ -55,7 +59,7 @@ while(True):
     p.setGravity(
         0,
         0,
-        p.readUserDebugParameter(c)
+        p.readUserDebugParameter(gravity_id)
     )
     for i in range(len(param_ids)):
         c = param_ids[i]
