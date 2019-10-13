@@ -1,9 +1,13 @@
 
 # Import
 import pybullet as p
+import pybullet_data
 
 # Connection to physics server
 p.connect(p.DIRECT)
+
+# Add a path where we want to search for data
+p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
 # Set gravity
 p.setGravity(0, 0, -10)
@@ -56,9 +60,15 @@ file_name = "pybullet_humanoid_timings.json"
 
 # State logger
 log_id = p.startStateLogging(p.STATE_LOGGING_PROFILE_TIMINGS, file_name)
-for i in range(1000):
-  p.stepSimulation()
-p.stopStateLogging(logId)
 
+# Run for 1000 steps
+for i in range(1000):
+    p.stepSimulation()
+# end for
+
+# Stop logging
+p.stopStateLogging(log_id)
+
+# Print informations
 print("ended benchmark")
-print("Use Chrome browser, visit about://tracing, and load the %s file" % fileName)
+print("Use Chrome browser, visit about://tracing, and load the %s file" % file_name)
